@@ -1,29 +1,23 @@
 import React from 'react';
 import { Control } from './Control';
 import { FormLabel, Input } from '@chakra-ui/react';
-import { FormError } from './FormError';
+import { FormError } from '../FormError';
 import { useField } from 'react-final-form';
-import { InputFormat } from '../../constants/dishInputFields';
-
-interface Props {
-  name: string;
-  label: string;
-  placeholder?: string;
-  type?: string;
-  format?: InputFormat;
-
-  [prop: string]: any;
-}
+import { FormInputProps } from '../../types/inputs';
 
 export const InputControl = ({
   name,
   label,
   placeholder,
-  format,
+  parser,
+  validator,
   type = 'text',
   ...props
-}: Props) => {
-  const { input, meta } = useField(name, { format: format });
+}: FormInputProps) => {
+  const { input, meta } = useField(name, {
+    parse: parser,
+    validate: validator,
+  });
   placeholder = placeholder ? placeholder : label;
 
   return (

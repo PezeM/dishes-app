@@ -8,6 +8,8 @@ import {
   DishInputFieldInterface,
   extraDishInputFields,
 } from '../constants/dishInputFields';
+import { validateRegex, validateIsRequired } from '../helpers/inputFieldValidators';
+import { formatTimeField } from '../helpers/inputFieldFormatters';
 
 export const DishForm = () => {
   const [extraFormInputs, setExtraFormInputs] = useState<DishInputFieldInterface[] | undefined>();
@@ -26,12 +28,22 @@ export const DishForm = () => {
       onSubmit={onSubmit}
       render={({ handleSubmit, form, errors, submitting }) => (
         <Box mt={8} mb={2} textAlign="left" as="form" onSubmit={handleSubmit}>
-          <InputControl name={'name'} label={'Dish name'} placeholder={'Enter dish name'} />
+          <InputControl
+            name={'name'}
+            label={'Dish name'}
+            placeholder={'Enter dish name'}
+            validator={validateRegex(new RegExp(/^[a-zA-Z\s]{3,30}$/), 'Enter a valid dish name')}
+          />
           <InputControl
             name={'preparation_time'}
             label={'Preparation time'}
             placeholder={'00:00:00'}
             mt={4}
+            parser={formatTimeField}
+            validator={validateRegex(
+              new RegExp(/^[0-9]+[:][0-5][0-9][:][0-5][0-9]$/),
+              'Enter valid preparation time',
+            )}
           />
 
           <SelectInputControl
@@ -40,6 +52,7 @@ export const DishForm = () => {
             label={'Type'}
             placeholder={'Select dish type'}
             onChange={onDishTypeChange}
+            validator={validateIsRequired('Dish type is required')}
           >
             <option value="pizza">🍕 Pizza</option>
             <option value="soup">🥣 Soup</option>
@@ -53,7 +66,8 @@ export const DishForm = () => {
                 label={value.label}
                 type={value.type}
                 placeholder={value.placeholder}
-                format={value.format}
+                parser={value.parser}
+                validator={value.validator}
                 key={index}
                 mt={4}
               />

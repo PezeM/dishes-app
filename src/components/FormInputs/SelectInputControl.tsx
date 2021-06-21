@@ -2,19 +2,25 @@ import React from 'react';
 import { useField } from 'react-final-form';
 import { Control } from './Control';
 import { FormLabel, Select } from '@chakra-ui/react';
-import { FormError } from './FormError';
+import { FormError } from '../FormError';
+import { FormInputProps } from '../../types/inputs';
 
-interface Props {
-  name: string;
-  label: string;
+interface Props extends Omit<FormInputProps, 'validator' | 'type'> {
   children: React.ReactNode;
-  placeholder?: string;
-
-  [prop: string]: any;
 }
 
-export const SelectInputControl = ({ name, label, children, placeholder, ...props }: Props) => {
-  const { input, meta } = useField(name);
+export const SelectInputControl = ({
+  name,
+  label,
+  validator,
+  children,
+  placeholder,
+  ...props
+}: Props) => {
+  const { input, meta } = useField(name, {
+    validate: validator,
+  });
+
   placeholder = placeholder ? placeholder : label;
 
   return (
