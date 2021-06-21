@@ -27,7 +27,7 @@ export const DishForm = () => {
     <Form
       onSubmit={onSubmit}
       render={({ handleSubmit, form, errors, submitting }) => (
-        <Box mt={8} mb={2} textAlign="left" as="form" onSubmit={handleSubmit}>
+        <Box p={4} mt={4} mb={2} textAlign="left" as="form" onSubmit={handleSubmit}>
           <InputControl
             name={'name'}
             label={'Dish name'}
@@ -79,6 +79,7 @@ export const DishForm = () => {
             mt={4}
             isLoading={submitting}
             loadingText={'Submitting'}
+            colorScheme={'blue'}
           >
             Submit
           </Button>

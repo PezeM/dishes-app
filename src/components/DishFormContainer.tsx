@@ -11,8 +11,8 @@ export const DishFormContainer = () => {
       width={'full'}
       maxWidth={'500px'}
       boxShadow={'lg'}
-      minHeight={'200px'}
-      borderRadius={4}
+      minHeight={'400px'}
+      borderRadius={8}
       borderWidth={1}
     >
       <Heading>Dish form</Heading>
