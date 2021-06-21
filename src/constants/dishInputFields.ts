@@ -1,3 +1,5 @@
+import { formatFloat, formatInt } from '../inputFieldFormatters';
+
 export type Dishes = 'pizza' | 'sandwich' | 'soup';
 export type InputFormat = (value: any, name: string) => any;
 
@@ -6,25 +8,8 @@ export interface DishInputFieldInterface {
   type: string;
   label: string;
   placeholder?: string;
-  format?: InputFormat; // Probably formatter
+  format?: InputFormat;
 }
-
-const formatFloat = (value: any, name: string): any => {
-  if (!value) return value;
-  console.log('value', value);
-  console.log('name', name);
-
-  return value.replace(',', '.');
-};
-
-const formatInt = (value: any, name: string): any => {
-  if (!value) return value;
-
-  console.log('value', value);
-  console.log('name', name);
-
-  return parseInt(value);
-};
 
 export const extraDishInputFields: Record<Dishes, DishInputFieldInterface[]> = {
   pizza: [

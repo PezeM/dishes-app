@@ -26,17 +26,11 @@ export const DishForm = () => {
       onSubmit={onSubmit}
       render={({ handleSubmit, form, errors, submitting }) => (
         <Box mt={8} mb={2} textAlign="left" as="form" onSubmit={handleSubmit}>
-          <InputControl
-            name={'name'}
-            label={'Dish name'}
-            placeholder={'Enter dish name'}
-            isRequired
-          />
+          <InputControl name={'name'} label={'Dish name'} placeholder={'Enter dish name'} />
           <InputControl
             name={'preparation_time'}
             label={'Preparation time'}
             placeholder={'00:00:00'}
-            isRequired
             mt={4}
           />
 
