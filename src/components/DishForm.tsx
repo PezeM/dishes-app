@@ -1,4 +1,4 @@
-import { Box, Button } from '@chakra-ui/react';
+import { Box, Button, useToast } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { Form } from 'react-final-form';
 import { InputControl } from './FormInputs/InputControl';
@@ -10,23 +10,57 @@ import {
 } from '../constants/dishInputFields';
 import { validateRegex, validateIsRequired } from '../helpers/inputFieldValidators';
 import { formatTimeField } from '../helpers/inputFieldFormatters';
+import { postFetch } from '../constants/api';
+import { FormApi } from 'final-form';
 
 export const DishForm = () => {
   const [extraFormInputs, setExtraFormInputs] = useState<DishInputFieldInterface[] | undefined>();
+  const toast = useToast();
 
-  const onSubmit = (e: any) => {
-    console.log('onSubmit', e);
+  const onSubmit = async (values: Object, form: FormApi) => {
+    try {
+      const response = await postFetch('dishes', values);
+      const data = await response.json();
+
+      if (!response.ok) {
+        const error = data ? data : response.status;
+        console.log('error', error);
+        toast({
+          title: 'Error',
+          description: `Error creating dish: ${error.type ? error.type : error}`,
+          status: 'error',
+          duration: 5000,
+        });
+        return;
+      }
+
+      toast({
+        title: 'Dish created',
+        description: 'Dish has been successfully created!',
+        status: 'success',
+        duration: 5000,
+      });
+
+      form.restart();
+      setExtraFormInputs(undefined);
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: `Error creating dish: ${error}`,
+        status: 'error',
+        duration: 5000,
+      });
+    }
   };
 
   const onDishTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.target.value);
     setExtraFormInputs(extraDishInputFields[e.target.value as Dishes]);
   };
 
   return (
     <Form
       onSubmit={onSubmit}
-      render={({ handleSubmit, form, errors, submitting }) => (
+      render={({ handleSubmit, submitting }) => (
         <Box p={4} mt={4} mb={2} textAlign="left" as="form" onSubmit={handleSubmit}>
           <InputControl
             name={'name'}
@@ -48,7 +82,7 @@ export const DishForm = () => {
 
           <SelectInputControl
             mt={4}
-            name={'dish'}
+            name={'type'}
             label={'Type'}
             placeholder={'Select dish type'}
             onChange={onDishTypeChange}
@@ -80,6 +114,7 @@ export const DishForm = () => {
             isLoading={submitting}
             loadingText={'Submitting'}
             colorScheme={'blue'}
+            spinnerPlacement="end"
           >
             Submit
           </Button>
