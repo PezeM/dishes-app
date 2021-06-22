@@ -15,7 +15,7 @@ export const DishFormContainer = () => {
       borderRadius={8}
       borderWidth={1}
     >
-      <Heading>Dish form</Heading>
+      <Heading mt={4}>Dish form</Heading>
       <DishForm />
     </Box>
   );

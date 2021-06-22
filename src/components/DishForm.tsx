@@ -1,4 +1,4 @@
-import { Box, Button, useToast } from '@chakra-ui/react';
+import { Box, Button, InputLeftElement, useToast } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { Form } from 'react-final-form';
 import { InputControl } from './FormInputs/InputControl';
@@ -12,6 +12,8 @@ import { validateRegex, validateIsRequired } from '../helpers/inputFieldValidato
 import { formatTimeField } from '../helpers/inputFieldFormatters';
 import { postFetch } from '../constants/api';
 import { FormApi } from 'final-form';
+import { InputFieldIcon } from './Icons';
+import { TimeIcon } from '@chakra-ui/icons';
 
 export const DishForm = () => {
   const [extraFormInputs, setExtraFormInputs] = useState<DishInputFieldInterface[] | undefined>();
@@ -66,6 +68,12 @@ export const DishForm = () => {
             name={'name'}
             label={'Dish name'}
             placeholder={'Enter dish name'}
+            leftInputElement={
+              <InputLeftElement
+                pointerEvents={'none'}
+                children={<InputFieldIcon color="gray.400" />}
+              />
+            }
             validator={validateRegex(new RegExp(/^[a-zA-Z\s]{3,30}$/), 'Enter a valid dish name')}
           />
           <InputControl
@@ -73,6 +81,9 @@ export const DishForm = () => {
             label={'Preparation time'}
             placeholder={'00:00:00'}
             mt={4}
+            leftInputElement={
+              <InputLeftElement pointerEvents={'none'} children={<TimeIcon color="gray.400" />} />
+            }
             parser={formatTimeField}
             validator={validateRegex(
               new RegExp(/^[0-9]+[:][0-5][0-9][:][0-5][0-9]$/),
@@ -94,17 +105,8 @@ export const DishForm = () => {
           </SelectInputControl>
 
           {extraFormInputs &&
-            extraFormInputs.map((value, index) => (
-              <InputControl
-                name={value.name}
-                label={value.label}
-                type={value.type}
-                placeholder={value.placeholder}
-                parser={value.parser}
-                validator={value.validator}
-                key={index}
-                mt={4}
-              />
+            extraFormInputs.map((extraInput, index) => (
+              <InputControl {...extraInput} key={index} mt={4} />
             ))}
 
           <Button

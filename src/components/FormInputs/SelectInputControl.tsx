@@ -5,7 +5,7 @@ import { FormLabel, Select } from '@chakra-ui/react';
 import { FormError } from '../FormError';
 import { FormInputProps } from '../../types/inputs';
 
-interface Props extends Omit<FormInputProps, 'validator' | 'type'> {
+interface Props extends Omit<FormInputProps, 'validator' | 'type' | 'leftInputElement'> {
   children: React.ReactNode;
 }
 
