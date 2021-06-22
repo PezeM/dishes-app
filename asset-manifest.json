@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.js": "/dishes-app/static/js/main.748f7989.chunk.js",
-    "main.js.map": "/dishes-app/static/js/main.748f7989.chunk.js.map",
+    "main.js": "/dishes-app/static/js/main.d94368d6.chunk.js",
+    "main.js.map": "/dishes-app/static/js/main.d94368d6.chunk.js.map",
     "runtime-main.js": "/dishes-app/static/js/runtime-main.8ddc4360.js",
     "runtime-main.js.map": "/dishes-app/static/js/runtime-main.8ddc4360.js.map",
-    "static/js/2.78e52a0a.chunk.js": "/dishes-app/static/js/2.78e52a0a.chunk.js",
-    "static/js/2.78e52a0a.chunk.js.map": "/dishes-app/static/js/2.78e52a0a.chunk.js.map",
+    "static/js/2.f40a3cb1.chunk.js": "/dishes-app/static/js/2.f40a3cb1.chunk.js",
+    "static/js/2.f40a3cb1.chunk.js.map": "/dishes-app/static/js/2.f40a3cb1.chunk.js.map",
     "index.html": "/dishes-app/index.html",
-    "static/js/2.78e52a0a.chunk.js.LICENSE.txt": "/dishes-app/static/js/2.78e52a0a.chunk.js.LICENSE.txt"
+    "static/js/2.f40a3cb1.chunk.js.LICENSE.txt": "/dishes-app/static/js/2.f40a3cb1.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.8ddc4360.js",
-    "static/js/2.78e52a0a.chunk.js",
-    "static/js/main.748f7989.chunk.js"
+    "static/js/2.f40a3cb1.chunk.js",
+    "static/js/main.d94368d6.chunk.js"
   ]
 }
