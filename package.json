@@ -1,7 +1,7 @@
 {
   "name": "dishes-app",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "homepage": "https://pezem.github.io/dishes-app",
   "dependencies": {
     "@chakra-ui/icons": "^1.0.13",
